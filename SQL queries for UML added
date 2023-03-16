@@ -1,0 +1,92 @@
+Some common SQL queries about this data base
+
+Creating two table to start with named Manufacturer and Product
+Creating table
+CREATE TABLE Manufacturer (
+    Manufacturer_ID int,
+    Manufacturer VARCHAR(255)
+)
+
+Inserting data into table
+INSERT Into Manufacturer
+VALUES
+(1, 'Dell'),
+(2, 'HP'),
+(3, 'Apple'),
+(4, 'Samsung')
+
+Select all from table Manufacturer
+
+SELECT *
+FROM Manufacturer 
+
+ 
+
+
+Creating table Product
+CREATE TABLE Product(
+    Product_ID int,
+    Manufacturer_ID int,
+    Model_name VARCHAR(255),
+    Model_Description VARCHAR(255),
+    Category_name VARCHAR(255),
+    SubCategory1_name VARCHAR(255),
+    SubCategory2_name VARCHAR(255),
+    Product_url VARCHAR(255),
+    Photo_url VARCHAR(255),
+    Status VARCHAR(255)
+)
+
+Inserting data into the table 
+INSERT INTO Product
+VALUES(1,1,'Vostro','The description goes here','IT','Computer','Laptop','URL of photo','URL of prod','Active'),
+(2,1,'Latitude','The description goes here','IT','Computer','Laptop','URL of photo','URL of prod','Active'),
+(3,3,'Ipad4','The description goes here','IT','Computer','Tablet','URL of photo','URL of prod','Active')
+
+Select all from table Product
+SELECT *
+from Product
+
+ 
+
+Inserting one more entry to the same table
+INSERT INTO Product
+VALUES(4,4,'S4','The description goes here','IT','phone','Smartphone','URL of photo','URL of prod','No Active')
+
+Querying both table together to fetch required data from it, using joins
+SELECT M.Manufacturer_ID,Model_name,Model_Description as Description ,Product_url, Status
+FROM Manufacturer as M
+JOIN Product as P
+On M.Manufacturer_ID = P.Manufacturer_ID
+
+ 
+Updating the Product table by changing the Status of Ipad4 from Active to not active and then in next query whole table
+UPDATE Product
+SET Status = 'Not Active'
+WHERE Model_name = 'Ipad4'
+
+
+SELECT *
+from Product
+
+ 
+Fetching data after updating product table
+SELECT M.Manufacturer_ID,Model_name,Model_Description as Description ,Product_url, Status
+FROM Manufacturer as M
+JOIN Product as P
+On M.Manufacturer_ID = P.Manufacturer_ID
+
+ 
+
+Dropping single entry and whole table at once
+DELETE from Product
+Where Model_name = 'Ipad4'
+
+Fetching table after dropping one entry
+SELECT *
+From Product
+ 
+
+Drop whole table at once
+DROP TABLE Product
+
